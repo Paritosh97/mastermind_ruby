@@ -20,7 +20,7 @@ class Codemaker
 
   def generate_feedback_code(code_guess)
     a = code_guess.clone
-    b = code.clone
+    b = @code.clone
 
     feedback = Array.new
     comparisons = Array.new
@@ -30,13 +30,14 @@ class Codemaker
     (0..3).each do |i|
       if comparisons[i] == true
         feedback << 2
-        b[i] = -1
+        b.delete_at(i)
       end
     end
     (0..3).each do |i|
       if comparisons[i] == false
         if b.include?a[i]
           feedback << 1
+          b.delete(a[i])
         else
           feedback << 0
         end
